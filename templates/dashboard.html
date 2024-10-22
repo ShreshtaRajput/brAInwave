@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        button {
+            margin: 10px 0;
+        }
+        .message {
+            color: #d9534f; /* Red color for error or important messages */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Plant Monitoring Dashboard</h1>
+
+    <h2>Threshold Moisture Level: {{ moisture_threshold }}%</h2>
+
+    <h2>Last Checked Moisture Level: 
+        {% if last_checked_moisture is not none %}
+            {{ last_checked_moisture }}%
+        {% else %}
+            Not yet checked.
+        {% endif %}
+    </h2>
+
+    <!-- Display the message regarding watering decision -->
+    <p class="message">
+        {% if message %}
+            {{ message }}
+        {% else %}
+            No updates on moisture check yet.
+        {% endif %}
+    </p>
+
+    <p>
+        <a href="{{ url_for('home') }}">
+            <button type="button">Go back to Homepage</button>
+        </a>
+    </p>
+    
+    <p>
+        <a href="{{ url_for('settings') }}">
+            <button type="button">Go to Settings</button>
+        </a>
+    </p>
+    
+    <form action="{{ url_for('get_moisture') }}" method="POST">
+        <button type="submit">GET MOISTURE</button>
+    </form>
+    
+    <p>Click "GET MOISTURE" to fetch the latest moisture reading from the sensor.</p>
+</body>
+</html>

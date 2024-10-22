@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+</head>
+<body>
+    <h1>Settings Page</h1>
+    
+    <h2>Current Threshold Moisture Level: {{ moisture_threshold }}%</h2>
+    
+    <form action="{{ url_for('update_threshold') }}" method="POST">
+        <label for="threshold">Set Custom Threshold Moisture Level:</label>
+        <input type="number" id="threshold" name="threshold" required>
+        <button type="submit">Update Threshold</button>
+    </form>
+
+    <p>
+        <a href="{{ url_for('dashboard') }}">
+            <button type="button">Go to Dashboard</button>
+        </a>
+    </p>
+</body>
+</html>
